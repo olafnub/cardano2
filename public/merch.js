@@ -92,10 +92,3 @@ function returnData(data) {
     return priceHTML.textContent += shirtPriceAda;
 }
 // to uncheck radio buttons for star rating in reviews
-const radioList = document.querySelectorAll('.star-widget > input');
-var radioState = false;
-radioList.forEach(x => {
-    x.addEventListener('click');
-    {
-    }
-});

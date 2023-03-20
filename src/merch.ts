@@ -117,15 +117,3 @@ function returnData(data: Cardano): string {
 }
 
 // to uncheck radio buttons for star rating in reviews
-
-const radioList = document.querySelectorAll('.star-widget > input') as HTMLInputElement;
-
-var radioState = false;
-
-radioList.forEach(x => {
-    x.addEventListener('click') {
-        
-    }
-});
-
-
