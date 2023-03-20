@@ -2,11 +2,11 @@
   "name": "cardano-natives",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "build": "npx tsc",
-    "start": "node public/node.js",
-    "dev": "npx tsc -w & nodemon public/node.js"
+    "start": "node public/app.js",
+    "dev": "npx tsc -w & nodemon public/app.js"
   },
   "keywords": [],
   "author": "",
