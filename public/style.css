@@ -315,7 +315,7 @@ footer {
     }
     /* footer */
     footer {
-        height: 78vh;
+        height: 63vh;
     }
     .header-box {
         width: 87%;
@@ -417,6 +417,7 @@ footer {
 
     /* Footer */
     footer {
+        height: 78vh;
         padding: 0.3rem;
     }
     .footer-container {
