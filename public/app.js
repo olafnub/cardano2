@@ -5,7 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const app = (0, express_1.default)();
-const port = 8888;
+const port = process.env.PORT || 8888;
 app.use(express_1.default.static('public'));
 app.listen(port, () => {
     console.log(`Working on port: ${port}!`);
