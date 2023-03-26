@@ -58,7 +58,6 @@ function switchCase(navSwitch: Navswitch) {
 
         };
 }
-
 let prevY = 0;
 window.addEventListener('scroll', () => {
     setTimeout(() => {
@@ -68,9 +67,11 @@ window.addEventListener('scroll', () => {
     let currentY: number = window.scrollY;
 
     if (currentY > prevY) {
-        navBar.classList.add('nav--appear');
+        navBar.classList.add('nav--remove');
+    } else if (currentY === 0) {
+        navBar.classList.remove('nav--remove');
     } else {
-        navBar.classList.remove('nav--appear');
+        navBar.classList.remove('nav--remove');
     }
 });
 

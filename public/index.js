@@ -88,10 +88,13 @@ window.addEventListener('scroll', () => {
     }, 100);
     let currentY = window.scrollY;
     if (currentY > prevY) {
-        navBar.classList.add('nav--appear');
+        navBar.classList.add('nav--remove');
+    }
+    else if (currentY === 0) {
+        navBar.classList.remove('nav--remove');
     }
     else {
-        navBar.classList.remove('nav--appear');
+        navBar.classList.remove('nav--remove');
     }
 });
 let previousAnchor = a[0];
