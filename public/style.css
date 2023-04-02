@@ -269,9 +269,6 @@ footer {
 
                                 /* ===== MEDIA QUERIES (MEDIUM DEVICES) ===== */
 @media screen and (max-width: 1024px) {
-    p, a {
-        font-size: 0.9rem
-    }
     h3 {
         font-size: large;
     }

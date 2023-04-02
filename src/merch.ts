@@ -1,4 +1,4 @@
-let anchor : NodeList = document.querySelectorAll('a');
+const anchor : NodeList = document.querySelectorAll('a');
 for (let i = 0; i < anchor.length; i++) {
     let checkAnchor = anchor[i] as HTMLAnchorElement;
     if (checkAnchor.textContent === "Cardano Natives") {
@@ -33,7 +33,7 @@ function giveWhiteTxt(current : Current) {
     } else return;
 }
 
-let faBars = document.querySelector('.fa-solid.fa-bars-staggered') as HTMLElement;
+const faBars = document.querySelector('.fa-solid.fa-bars-staggered') as HTMLElement;
 
 let tryAgain = false;
 
@@ -76,11 +76,12 @@ window.addEventListener('scroll', () => {
 });
 
 };
+
 runThis();
 
 // Using coingecko to get cardano price for shopping price
 
-let priceHTML = document.querySelector('.price') as HTMLParagraphElement;
+const priceHTML = document.querySelector('.price') as HTMLParagraphElement;
 let priceString: string | null = priceHTML.textContent;
 let priceUsd:string = "";
 if (priceString !== null) {
@@ -111,10 +112,24 @@ function returnData(data: Cardano): string {
     const cardanoBtc = cardanoConversion.btc;
     const cardanoEth = cardanoConversion.eth;
 
-    let shirtPriceAda: string = (Number(priceUsd) * cardanoUsd).toFixed(5) + " ADA";
+    let shirtPriceAda: string = (Number(priceUsd) / cardanoUsd).toFixed(5) + " ADA";
 
     return priceHTML.textContent += shirtPriceAda;
 
 }
 
-// to uncheck radio buttons for star rating in reviews
+// get data from reviews
+const submitBtn = document.querySelector('#submit') as HTMLButtonElement;
+const nameInpt = document.querySelector('#name') as HTMLInputElement;
+const descTxt = document.querySelector('#description') as HTMLTextAreaElement;
+
+// submitBtn?.addEventListener('click', getInfo);
+// const baseUrl = 'http://localhost:8888/';
+// async function getInfo(event: any) {
+//     console.log('hi');
+//     event.preventDefault();
+//     // const res = await fetch(baseUrl, {
+//     //     method: 'GET'
+//     // });
+//     // console.log(res);
+// };

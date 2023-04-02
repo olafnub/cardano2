@@ -10,4 +10,5 @@ app.listen(port, () => {
 
 app.get('/', function(req: Request, res: Response) {
     res.sendFile('index.html');
-})
+    res.status(200).json();
+});
