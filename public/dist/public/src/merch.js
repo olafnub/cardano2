@@ -11,6 +11,7 @@ function runThis() {
     const navBar = document.querySelector('nav');
     const ulNav = document.querySelector("#navUl");
     const a = document.querySelectorAll('a');
+    let previousAnchor = a[0];
     a.forEach(x => {
         x.addEventListener("click", () => {
             var _a;
@@ -98,6 +99,10 @@ function returnData(data) {
 const submitBtn = document.querySelector('#submit');
 const nameInpt = document.querySelector('#name');
 const descTxt = document.querySelector('#description');
+const frm = document.querySelector('#formId');
+frm.addEventListener('click', (e) => {
+    e.preventDefault();
+});
 // submitBtn?.addEventListener('click', getInfo);
 // const baseUrl = 'http://localhost:8888/';
 // async function getInfo(event: any) {

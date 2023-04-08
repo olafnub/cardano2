@@ -12,6 +12,7 @@ const navBar = document.querySelector('nav') as HTMLElement;
 const ulNav = document.querySelector<HTMLUListElement>("#navUl")!;
 const a = document.querySelectorAll<HTMLAnchorElement>('a');
 
+let previousAnchor : HTMLAnchorElement = a[0];
 type Current = {
     anchor: HTMLAnchorElement;
     text: string | undefined;
@@ -122,6 +123,11 @@ function returnData(data: Cardano): string {
 const submitBtn = document.querySelector('#submit') as HTMLButtonElement;
 const nameInpt = document.querySelector('#name') as HTMLInputElement;
 const descTxt = document.querySelector('#description') as HTMLTextAreaElement;
+const frm = document.querySelector('#formId') as HTMLFormElement;
+
+frm.addEventListener('click', (e) => {
+    e.preventDefault();
+})
 
 // submitBtn?.addEventListener('click', getInfo);
 // const baseUrl = 'http://localhost:8888/';

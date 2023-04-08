@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cardano-Natives</title>
-    <link rel="stylesheet" href="merch.css">
+    <link rel="stylesheet" href="assets/merch.css">
     <script src="https://kit.fontawesome.com/e5e475af0a.js" crossorigin="anonymous"></script>
 </head>
 <body>
@@ -80,27 +80,16 @@
                 </div>
             </div>
         </section>
-
         <section id="reviews">
             <h2>Reviews</h2>
             <div class="review-container">
                 <div class="input-review">
+
+                    <!-- <iframe name="dummyframe" id="dummyframe" style="display: none;"></iframe> -->
+                    <form id="formId" action="/nodejs" method="post" enctype="application/x-www-form-urlencoded">
                     <label for="name"><h3>Submit your review</h3></label>
-                    <div class="star-widget">
-                        <input type="radio" id="rate-5" name="rating">
-                        <label for="rate-5"><i class="fa fa-star" aria-hidden="true"></i></label>
-                        <input type="radio" id="rate-4" name="rating">
-                        <label for="rate-4"><i class="fa fa-star" aria-hidden="true"></i></label>
-                        <input type="radio" id="rate-3" name="rating">
-                        <label for="rate-3"><i class="fa fa-star" aria-hidden="true"></i></label>
-                        <input type="radio" id="rate-2" name="rating">
-                        <label for="rate-2"><i class="fa fa-star" aria-hidden="true"></i></label>
-                        <input type="radio" id="rate-1" name="rating">
-                        <label for="rate-1"><i class="fa fa-star" aria-hidden="true"></i></label>
-                    </div>
-                    <form>
-                        <input id="name" type="text" placeholder="name" autocomplete="off">
-                        <textarea id="description" placeholder="Describe your experience"></textarea>
+                        <input id="name" type="text" placeholder="name" name="username" autocomplete="off" required="true">
+                        <textarea id="description" placeholder="Describe your experience" name="description"required="true"></textarea>
                         <button id="submit">Submit</button>
                     </form>
                 </div>
@@ -108,10 +97,9 @@
                     <h3>All your reviews</h3>
                 </div>
             </div>
-
         </section>
-
         <section class="about">
+            <h3>Write yourself a <a href="reviews">review!</a></h3>
             <h3>This Month's Shirt</h3>
             <p>We rotate with monthly designs to support creators and give projects awareness</p>
         </section>
@@ -120,6 +108,6 @@
             <h2>Previous</h2>
         </section>
     </main>
-    <script src="merch.js"></script>
+    <script src="dist/public/src/merch.js"></script>
 </body>
 </html>
