@@ -1,9 +1,9 @@
 import dotenv from 'dotenv';
 import express, {Express, Request, Response} from "express";
 import mongoose, {connect} from 'mongoose'
-import reviewsExport from '../public/src/reviews'
+import reviewsExport from '../src/reviews'
 
-console.log('hiw');
+// console.log('hiw');
 
 interface IUser {
     username: string,
@@ -24,7 +24,7 @@ app.get('/', function(req: Request, res: Response) {
     res.render('index');
 });
 
-app.post('/index.html', (req: Request, res: Response) => {
+app.post('/reviews', (req: Request, res: Response) => {
     const user = {
         username: req.body.username,
         description: req.body.description

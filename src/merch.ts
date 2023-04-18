@@ -125,9 +125,9 @@ const nameInpt = document.querySelector('#name') as HTMLInputElement;
 const descTxt = document.querySelector('#description') as HTMLTextAreaElement;
 const frm = document.querySelector('#formId') as HTMLFormElement;
 
-frm.addEventListener('click', (e) => {
-    e.preventDefault();
-})
+// frm.addEventListener('click', (e) => {
+//     e.preventDefault();
+// })
 
 // submitBtn?.addEventListener('click', getInfo);
 // const baseUrl = 'http://localhost:8888/';

@@ -5,8 +5,8 @@
   "main": "app.js",
   "scripts": {
     "build": "npx tsc",
-    "start": "node server/app.js",
-    "dev": "npx tsc -w & nodemon server/app.js"
+    "start": "node public/dist/server/app.js",
+    "dev": "npx tsc -w & nodemon public/dist/server/app.js"
   },
   "keywords": [],
   "author": "",
