@@ -100,9 +100,9 @@ const submitBtn = document.querySelector('#submit');
 const nameInpt = document.querySelector('#name');
 const descTxt = document.querySelector('#description');
 const frm = document.querySelector('#formId');
-// frm.addEventListener('click', (e) => {
-//     e.preventDefault();
-// })
+frm.addEventListener('submit', () => {
+    alert("Thanks for the submission! Hope you see you browsing again");
+});
 // submitBtn?.addEventListener('click', getInfo);
 // const baseUrl = 'http://localhost:8888/';
 // async function getInfo(event: any) {

@@ -24,13 +24,21 @@ app.get('/', function(req: Request, res: Response) {
     res.render('index');
 });
 
-app.post('/reviews', (req: Request, res: Response) => {
+app.post('/', (req: Request, res: Response) => {
+    const ts = Date.now(); 
+    const date_time = new Date(ts);
+    const date = date_time.getDate();
+    const month = date_time.getMonth() + 1;
+    const year = date_time.getFullYear();
+
     const user = {
         username: req.body.username,
-        description: req.body.description
+        description: req.body.description,
+        time: year + "-" + month + "-" + date
     }
     new reviewsExport(user).save();
-
+    res.redirect('back')
+    
 });
 
 app.get('*/:all', (req, res) => {

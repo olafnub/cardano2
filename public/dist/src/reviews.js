@@ -32,6 +32,10 @@ const mySchema = new mongoose_1.Schema({
     description: {
         type: String,
         required: true
+    },
+    time: {
+        type: String,
+        required: true
     }
 });
 const user = mongoose_1.default.model('reviews', mySchema);

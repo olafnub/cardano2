@@ -2,7 +2,8 @@ import mongoose, {Schema, model} from 'mongoose';
 
 interface IReviews {
     username: string,
-    description: string
+    description: string,
+    time: string
 }
 
 const mySchema = new Schema<IReviews>({
@@ -11,6 +12,10 @@ const mySchema = new Schema<IReviews>({
         required: true
     },
     description: {
+        type: String,
+        required: true
+    },
+    time: {
         type: String,
         required: true
     }
