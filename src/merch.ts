@@ -127,15 +127,12 @@ const frm = document.querySelector('#formId') as HTMLFormElement;
 
 frm.addEventListener('submit', () => {
    alert("Thanks for the submission! Hope you see you browsing again")
-})
+});
 
-// submitBtn?.addEventListener('click', getInfo);
-// const baseUrl = 'http://localhost:8888/';
-// async function getInfo(event: any) {
-//     console.log('hi');
-//     event.preventDefault();
-//     // const res = await fetch(baseUrl, {
-//     //     method: 'GET'
-//     // });
-//     // console.log(res);
-// };
+
+// async function somethingCool() {
+// const findResult = await reviews.find();
+// console.log(findResult);
+// }
+
+// somethingCool();
