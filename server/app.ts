@@ -15,9 +15,15 @@ app.use(express.static('public'));
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 
+app.set('view engine', 'ejs');
+
 app.get('/', function(req: Request, res: Response) {
-    res.render('index');
+    res.render('index.html');
 });
+
+app.get('/merch', (req: Request, res: Response) => {
+    res.render('merch');
+})
 
 app.post('/submit', (req: Request, res: Response) => {
     const ts = Date.now(); 
@@ -34,6 +40,8 @@ app.post('/submit', (req: Request, res: Response) => {
     new reviewsExport(user).save();
     res.redirect('back');
 });
+
+
 
 app.get('/reviews', async (req, res) => {
     const reviews = await reviewsExport.find({});
