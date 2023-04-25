@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cardano-Natives</title>
-    <link rel="stylesheet" href="assets/merch.css">
+    <link rel="stylesheet" href="assets/merch.css" type="text/css">
     <script src="https://kit.fontawesome.com/e5e475af0a.js" crossorigin="anonymous"></script>
 </head>
 <body>
@@ -83,6 +83,21 @@
         <section id="reviews">
             <h2>Reviews</h2>
             <div class="review-container">
+                <div class="review-list">
+                    <h3>All reviews</h3>
+                    <ul>
+                        <% for (let review of reviews) { %>
+                            <ul>
+                                <li>
+                                    <h4><%= review.username  %></h4>
+                                    <p><%= review.description %></p>
+                                    <p><%= review.time %></p>
+                                </li>
+                            </ul>
+                            <% } %>
+                            
+                    </ul>
+                </div>
                 <div class="input-review">
                     <form id="formId" action="/submit" method="post" enctype="application/x-www-form-urlencoded">
                     <label for="name"><h3>Submit your review</h3></label>
@@ -90,9 +105,6 @@
                         <textarea id="description" placeholder="Describe your experience" name="description"required="true"></textarea>
                         <button id="submit">Submit</button>
                     </form>
-                </div>
-                <div class="review-list">
-                    <h3>All your reviews</h3>
                 </div>
             </div>
         </section>

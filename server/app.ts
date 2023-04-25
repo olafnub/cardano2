@@ -21,8 +21,10 @@ app.get('/', function(req: Request, res: Response) {
     res.render('index.html');
 });
 
-app.get('/merch', (req: Request, res: Response) => {
-    res.render('merch');
+app.get('/merch', async (req: Request, res: Response) => {
+    const reviews = await reviewsExport.find({});
+    res.render('merch', {reviews});
+
 })
 
 app.post('/submit', (req: Request, res: Response) => {
@@ -39,26 +41,6 @@ app.post('/submit', (req: Request, res: Response) => {
     }
     new reviewsExport(user).save();
     res.redirect('back');
-});
-
-
-
-app.get('/reviews', async (req, res) => {
-    const reviews = await reviewsExport.find({});
-    const endLi = "</li>";
-    let htmlList = "<ul>"
-
-    for (let i = 0; i < reviews.length; i++) {
-        let li = "<li>";
-        let mame = String(reviews[i].username);
-        li+=mame;
-        li+=endLi;
-        htmlList+=li;
-    }
-
-    const htmlEndList = "</ul>"
-    htmlList+=htmlEndList;
-    res.send(htmlList);
 });
 
 app.get('*/:all', (req, res) => {

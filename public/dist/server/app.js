@@ -29,9 +29,10 @@ app.set('view engine', 'ejs');
 app.get('/', function (req, res) {
     res.render('index.html');
 });
-app.get('/merch', (req, res) => {
-    res.render('merch');
-});
+app.get('/merch', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const reviews = yield reviews_1.default.find({});
+    res.render('merch', { reviews });
+}));
 app.post('/submit', (req, res) => {
     const ts = Date.now();
     const date_time = new Date(ts);
@@ -46,21 +47,6 @@ app.post('/submit', (req, res) => {
     new reviews_1.default(user).save();
     res.redirect('back');
 });
-app.get('/reviews', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const reviews = yield reviews_1.default.find({});
-    const endLi = "</li>";
-    let htmlList = "<ul>";
-    for (let i = 0; i < reviews.length; i++) {
-        let li = "<li>";
-        let mame = String(reviews[i].username);
-        li += mame;
-        li += endLi;
-        htmlList += li;
-    }
-    const htmlEndList = "</ul>";
-    htmlList += htmlEndList;
-    res.send(htmlList);
-}));
 app.get('*/:all', (req, res) => {
     const { all } = req.params;
     res.send(`<h1>Sorry can't find ${all}</h1>`);
