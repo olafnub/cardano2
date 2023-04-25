@@ -2,10 +2,15 @@ import dotenv from 'dotenv';
 import express, {Express, Request, Response} from "express";
 import mongoose, {connect} from "mongoose";
 import reviewsExport from '../src/reviews';
+import Filter from "bad-words";
+// import words from "../bad-words.json" //https://www.cs.cmu.edu/~biglou/resources/
 
 dotenv.config();
 const app: Express = express();
 const port = process.env.PORT;
+const filter = new Filter();
+// filter.addWords(...words); 
+
 
 mongoose.connect(process.env.DATABASE_URL!)
 .then(() => console.log("Mongoose Connected!"))
@@ -28,6 +33,7 @@ app.get('/merch', async (req: Request, res: Response) => {
 })
 
 app.post('/submit', (req: Request, res: Response) => {
+
     const ts = Date.now(); 
     const date_time = new Date(ts);
     const date = date_time.getDate();
@@ -35,8 +41,8 @@ app.post('/submit', (req: Request, res: Response) => {
     const year = date_time.getFullYear();
 
     const user = {
-        username: req.body.username,
-        description: req.body.description,
+        username: filter.clean(req.body.username),
+        description: filter.clean(req.body.description),
         time: year + "-" + month + "-" + date
     }
     new reviewsExport(user).save();

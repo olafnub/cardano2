@@ -16,9 +16,13 @@ const dotenv_1 = __importDefault(require("dotenv"));
 const express_1 = __importDefault(require("express"));
 const mongoose_1 = __importDefault(require("mongoose"));
 const reviews_1 = __importDefault(require("../src/reviews"));
+const bad_words_1 = __importDefault(require("bad-words"));
+// import words from "../bad-words.json" //https://www.cs.cmu.edu/~biglou/resources/
 dotenv_1.default.config();
 const app = (0, express_1.default)();
 const port = process.env.PORT;
+const filter = new bad_words_1.default();
+// filter.addWords(...words); 
 mongoose_1.default.connect(process.env.DATABASE_URL)
     .then(() => console.log("Mongoose Connected!"))
     .catch((err) => console.log("error from mongoose", err));
@@ -40,8 +44,8 @@ app.post('/submit', (req, res) => {
     const month = date_time.getMonth() + 1;
     const year = date_time.getFullYear();
     const user = {
-        username: req.body.username,
-        description: req.body.description,
+        username: filter.clean(req.body.username),
+        description: filter.clean(req.body.description),
         time: year + "-" + month + "-" + date
     };
     new reviews_1.default(user).save();
