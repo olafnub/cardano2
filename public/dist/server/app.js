@@ -17,12 +17,12 @@ const express_1 = __importDefault(require("express"));
 const mongoose_1 = __importDefault(require("mongoose"));
 const reviews_1 = __importDefault(require("../src/reviews"));
 const bad_words_1 = __importDefault(require("bad-words"));
-// import words from "../bad-words.json" //https://www.cs.cmu.edu/~biglou/resources/
+const bad_words_json_1 = __importDefault(require("../bad-words.json")); //https://www.cs.cmu.edu/~biglou/resources/
 dotenv_1.default.config();
 const app = (0, express_1.default)();
 const port = process.env.PORT;
 const filter = new bad_words_1.default();
-// filter.addWords(...words); 
+filter.addWords(...bad_words_json_1.default);
 mongoose_1.default.connect(process.env.DATABASE_URL)
     .then(() => console.log("Mongoose Connected!"))
     .catch((err) => console.log("error from mongoose", err));
@@ -35,7 +35,8 @@ app.get('/', function (req, res) {
 });
 app.get('/merch', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const reviews = yield reviews_1.default.find({});
-    res.render('merch', { reviews });
+    // res.render('merch', {reviews});
+    res.render('merch');
 }));
 app.post('/submit', (req, res) => {
     const ts = Date.now();

@@ -84,19 +84,7 @@
             <h2>Reviews</h2>
             <div class="review-container">
                 <div class="review-list">
-                    <h3>All reviews</h3>
-                    <ul>
-                        <% for (let review of reviews) { %>
-                            <ul>
-                                <li>
-                                    <h4><%= review.username  %></h4>
-                                    <p><%= review.description %></p>
-                                    <p><%= review.time %></p>
-                                </li>
-                            </ul>
-                            <% } %>
-                            
-                    </ul>
+                    <!-- <h3>All reviews</h3> -->
                 </div>
                 <div class="input-review">
                     <form id="formId" action="/submit" method="post" enctype="application/x-www-form-urlencoded">

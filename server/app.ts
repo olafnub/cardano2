@@ -3,14 +3,15 @@ import express, {Express, Request, Response} from "express";
 import mongoose, {connect} from "mongoose";
 import reviewsExport from '../src/reviews';
 import Filter from "bad-words";
-// import words from "../bad-words.json" //https://www.cs.cmu.edu/~biglou/resources/
+import BadWordsFilter from '../src/badwords';
+import words from "../bad-words.json" //https://www.cs.cmu.edu/~biglou/resources/
 
 dotenv.config();
 const app: Express = express();
 const port = process.env.PORT;
-const filter = new Filter();
-// filter.addWords(...words); 
+const filter: BadWordsFilter = new Filter();
 
+filter.addWords(...words);
 
 mongoose.connect(process.env.DATABASE_URL!)
 .then(() => console.log("Mongoose Connected!"))
@@ -28,7 +29,8 @@ app.get('/', function(req: Request, res: Response) {
 
 app.get('/merch', async (req: Request, res: Response) => {
     const reviews = await reviewsExport.find({});
-    res.render('merch', {reviews});
+    // res.render('merch', {reviews});
+    res.render('merch');
 
 })
 
