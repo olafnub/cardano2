@@ -119,20 +119,9 @@ function returnData(data: Cardano): string {
 
 }
 
-// get data from reviews
-const submitBtn = document.querySelector('#submit') as HTMLButtonElement;
-const nameInpt = document.querySelector('#name') as HTMLInputElement;
-const descTxt = document.querySelector('#description') as HTMLTextAreaElement;
+// THank user for submitting a form review
 const frm = document.querySelector('#formId') as HTMLFormElement;
 
 frm.addEventListener('submit', () => {
    alert("Thanks for the submission! Hope you see you browsing again")
 });
-
-
-// async function somethingCool() {
-// const findResult = await reviews.find();
-// console.log(findResult);
-// }
-
-// somethingCool();

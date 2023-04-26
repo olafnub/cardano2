@@ -111,6 +111,9 @@ section {
     cursor:pointer;
     box-shadow: rgb(17 17 17) 0px 0px 1px 1px;
 }
+.size-box:active {
+    border: 1px solid white;
+}
 .size-container {
     display: flex;
     flex-wrap: wrap;
@@ -151,6 +154,13 @@ section {
     height: 2.3rem;
     background: var(--primary-color);
     color: var(--color-white);
+}
+.buy-container button:hover, #submit:hover {
+    cursor: pointer;
+}
+.buy-container button:active, #submit:active {
+    padding: 0.3rem;
+    border: 1px solid white;
 }
 .buy-container select {
     text-align: center;

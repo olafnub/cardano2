@@ -1,11 +1,10 @@
-// import {v4 as uuidv4} from 'uuid'
 // cmd shift p -> typescript restart server | check if code is right or not for red squigly
-let urlByTerm: string = 'ByTerm?term=';
-let urlByName: string = 'Name?slug=';
-let cardanoUrl: string = 'https://us-central1-builtoncardano.cloudfunctions.net/api/projects';
+const urlByTerm: string = 'ByTerm?term=';
+const urlByName: string = 'Name?slug=';
+const cardanoUrl: string = 'https://us-central1-builtoncardano.cloudfunctions.net/api/projects';
 
 let terms: string[] = ["defi", "nft collections", "industry solutions"];
-terms.forEach(term => {
+terms.forEach(term=> {
     fetch(cardanoUrl + urlByTerm + term)
     .then(response => {
         if (response.ok) {
@@ -85,7 +84,7 @@ function createInsideCard(term: string, lists: HTMLLIElement, element: string, e
     termUl.appendChild(lists);
 }
 
-// To let to navbar scroll away when scrolling
+// Navbar scroll away when scrolling down
 const navBar = document.querySelector('nav') as HTMLElement;
 const ulNav = document.querySelector<HTMLUListElement>("#navUl")!;
 const a = document.querySelectorAll<HTMLAnchorElement>('a');
@@ -130,8 +129,8 @@ function giveWhiteTxt(current : Current): void {
     } else return;
 }
 
+// Hamburger menu show when clicked & not clicked
 let faBars = document.querySelector('.fa-solid.fa-bars-staggered') as HTMLElement;
-
 let tryAgain = false;
 
 type Navswitch = {
@@ -156,6 +155,7 @@ function switchCase(navSwitch: Navswitch): void {
         };
 }
 
+// Guide the picture on main page to scroll when arrows are clicked
 const faLeft = document.querySelector('.fa-solid.fa-arrow-left-long') as HTMLElement;
 const faRight = document.querySelector<HTMLElement>('.fa-solid.fa-arrow-right-long') as HTMLElement;
 const box = document.querySelector('.box') as HTMLElement;

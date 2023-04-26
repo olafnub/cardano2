@@ -1,9 +1,8 @@
 "use strict";
-// import {v4 as uuidv4} from 'uuid'
 // cmd shift p -> typescript restart server | check if code is right or not for red squigly
-let urlByTerm = 'ByTerm?term=';
-let urlByName = 'Name?slug=';
-let cardanoUrl = 'https://us-central1-builtoncardano.cloudfunctions.net/api/projects';
+const urlByTerm = 'ByTerm?term=';
+const urlByName = 'Name?slug=';
+const cardanoUrl = 'https://us-central1-builtoncardano.cloudfunctions.net/api/projects';
 let terms = ["defi", "nft collections", "industry solutions"];
 terms.forEach(term => {
     fetch(cardanoUrl + urlByTerm + term)
@@ -77,7 +76,7 @@ function createInsideCard(term, lists, element, elementText, stringElement) {
     }
     termUl.appendChild(lists);
 }
-// To let to navbar scroll away when scrolling
+// Navbar scroll away when scrolling down
 const navBar = document.querySelector('nav');
 const ulNav = document.querySelector("#navUl");
 const a = document.querySelectorAll('a');
@@ -117,6 +116,7 @@ function giveWhiteTxt(current) {
     else
         return;
 }
+// Hamburger menu show when clicked & not clicked
 let faBars = document.querySelector('.fa-solid.fa-bars-staggered');
 let tryAgain = false;
 faBars === null || faBars === void 0 ? void 0 : faBars.addEventListener("click", () => {
@@ -134,6 +134,7 @@ function switchCase(navSwitch) {
     }
     ;
 }
+// Guide the picture on main page to scroll when arrows are clicked
 const faLeft = document.querySelector('.fa-solid.fa-arrow-left-long');
 const faRight = document.querySelector('.fa-solid.fa-arrow-right-long');
 const box = document.querySelector('.box');

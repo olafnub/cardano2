@@ -95,16 +95,8 @@ function returnData(data) {
     let shirtPriceAda = (Number(priceUsd) / cardanoUsd).toFixed(5) + " ADA";
     return priceHTML.textContent += shirtPriceAda;
 }
-// get data from reviews
-const submitBtn = document.querySelector('#submit');
-const nameInpt = document.querySelector('#name');
-const descTxt = document.querySelector('#description');
+// THank user for submitting a form review
 const frm = document.querySelector('#formId');
 frm.addEventListener('submit', () => {
     alert("Thanks for the submission! Hope you see you browsing again");
 });
-// async function somethingCool() {
-// const findResult = await reviews.find();
-// console.log(findResult);
-// }
-// somethingCool();
