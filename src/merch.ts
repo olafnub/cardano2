@@ -119,9 +119,16 @@ function returnData(data: Cardano): string {
 
 }
 
-// THank user for submitting a form review
+// Thank user for submitting a form review
 const frm = document.querySelector('#formId') as HTMLFormElement;
 
 frm.addEventListener('submit', () => {
    alert("Thanks for the submission! Hope you see you browsing again")
 });
+
+// ADded to your cart function
+const addCart = document.querySelector("#add-to-cart") as HTMLButtonElement;
+
+addCart.addEventListener('click', () => {
+    alert("Added to your cart")
+})
