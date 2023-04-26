@@ -121,14 +121,46 @@ function returnData(data: Cardano): string {
 
 // Thank user for submitting a form review
 const frm = document.querySelector('#formId') as HTMLFormElement;
-
 frm.addEventListener('submit', () => {
    alert("Thanks for the submission! Hope you see you browsing again")
 });
 
-// ADded to your cart function
-const addCart = document.querySelector("#add-to-cart") as HTMLButtonElement;
+// Description of user's purchase || send selectBox & qtyValue
+let selectBox: string | null = "";
+let previousBox: HTMLDivElement | null;
+const sizeBox: NodeListOf<HTMLDivElement> = document.querySelectorAll('.size-box');
+sizeBox.forEach(box => {
+    box.addEventListener('click', () => {
+        if (previousBox !== box) {
+            box.style.color = 'white';
+            box.style.background = 'var(--primary-color)';
+            if (previousBox != null) {
+                previousBox.style.color = 'black';
+                previousBox.style.background = 'rgba(var(--color-gray), 40%)';
+            }
+            selectBox = box.textContent;
+            previousBox = box;
+        } else {
+            previousBox.style.color = 'black';
+            previousBox.style.background = 'rgba(var(--color-gray), 40%)';
+            previousBox = null;
+            selectBox = "";
+        }
+    })
+});
 
+const qtySelect = document.querySelector('#quantity-list') as HTMLSelectElement;
+let qtyValue: string = "";
+qtySelect.addEventListener('click', () => {
+    qtyValue = qtySelect.value;
+});
+
+// Added to your cart function
+const addCart = document.querySelector("#add-to-cart") as HTMLButtonElement;
 addCart.addEventListener('click', () => {
-    alert("Added to your cart")
-})
+    if (selectBox == '') {
+        alert("Please select size");
+    } else {
+        alert("Added to your cart");
+    }
+});

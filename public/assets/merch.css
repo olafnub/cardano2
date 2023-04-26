@@ -111,9 +111,6 @@ section {
     cursor:pointer;
     box-shadow: rgb(17 17 17) 0px 0px 1px 1px;
 }
-.size-box:active {
-    border: 1px solid white;
-}
 .size-container {
     display: flex;
     flex-wrap: wrap;
@@ -253,7 +250,12 @@ section {
 }
                                                        /* ===== MEDIA QUERIES (MEDIUM DEVICES) ===== */
 @media screen and (max-width: 1024px) {
-    
+    .quant {
+        width: 40%;
+    }
+    .left-side {
+        grid-template-columns: 0;
+    }
 }
 
                                                         /* ===== MEDIA QUERIES (SMALl DEVICES) ===== */
