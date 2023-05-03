@@ -81,7 +81,6 @@ window.addEventListener('scroll', () => {
 runThis();
 
 // Using coingecko to get cardano price for shopping price
-
 const priceHTML = document.querySelector('.price') as HTMLParagraphElement;
 let priceString: string | null = priceHTML.textContent;
 let priceUsd:string = "";
