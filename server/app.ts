@@ -3,15 +3,16 @@ import express, {Express, Request, Response} from "express";
 import mongoose, {connect} from "mongoose";
 import reviewsExport from '../src/reviews';
 import Filter from "bad-words";
-import BadWordsFilter from '../src/badwords';
+// const badWordsFilter = require('../public/dist/src/badwords');
 import words from "../bad-words.json" //https://www.cs.cmu.edu/~biglou/resources/
+import cors from 'cors';
 
+const filter = new Filter();
+
+filter.addWords(...words);
 dotenv.config();
 const app: Express = express();
 const port = process.env.PORT;
-const filter: BadWordsFilter = new Filter();
-
-filter.addWords(...words);
 
 mongoose.connect(process.env.DATABASE_URL!)
 .then(() => console.log("Mongoose Connected!"))
@@ -23,16 +24,10 @@ app.use(express.json());
 
 app.set('view engine', 'ejs');
 
-app.get('/', function(req: Request, res: Response) {
-    res.render('index.html');
-});
+app.use("/", require("../../../routes/route.js"));
 
-app.get('/merch', async (req: Request, res: Response) => {
-    const reviews = await reviewsExport.find({});
-    // res.render('merch', {reviews});
-    res.render('merch');
-
-})
+// Enable cors
+app.use(cors());
 
 app.post('/submit', (req: Request, res: Response) => {
 
@@ -51,10 +46,10 @@ app.post('/submit', (req: Request, res: Response) => {
     res.redirect('back');
 });
 
-app.get('*/:all', (req, res) => {
-    const {all} = req.params;
-    res.send(`<h1>Sorry can't find ${all}</h1>`);
-});
+// app.get('*/:all', (req, res) => {
+//     const {all} = req.params;
+//     res.send(`<h1>Sorry can't find ${all}</h1>`);
+// });
 
 app.listen(port, () => {
     console.log(`Working on port: ${port}!`);

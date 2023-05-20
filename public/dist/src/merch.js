@@ -1,11 +1,9 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-const key_1 = __importDefault(require("./key"));
-// import dotenv from 'dotenv';
-console.log(key_1.default);
+// Fetchs data from own server to bypass CORS
+fetch("http://localhost:8888/merch.json")
+    .then(res => res.json())
+    .then(data => console.log(data))
+    .catch(err => console.log(err));
 const anchor = document.querySelectorAll('a');
 for (let i = 0; i < anchor.length; i++) {
     let checkAnchor = anchor[i];
@@ -146,26 +144,3 @@ addCart.addEventListener('click', () => {
         alert("Added to your cart");
     }
 });
-// Fetch for printify api
-// const token = process.env.PRINTIFY_API_TEST_KEY;
-fetch('https://api.printify.com/v1/shops.json', {
-    credentials: 'include',
-    method: 'GET',
-    headers: {
-        'Content-Type': 'application/json;charset=utf-8',
-        'Authorization': `Bearer `,
-        'Origin': "http://localhost:8888",
-        "Access-Control-Allow-Origin": "http://localhost:8888"
-    }
-})
-    .then(response => {
-    if (response.status === 200) {
-        console.log("okay!");
-        response.text();
-    }
-    else {
-        console.log("Wrong because", response.statusText);
-    }
-})
-    .then(result => console.log(result))
-    .catch(error => console.log('error', error));
