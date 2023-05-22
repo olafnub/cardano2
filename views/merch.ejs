@@ -26,17 +26,13 @@
         <section id="shirt">  
             <div class="container">
                 <div class="left-side" dir="ltr">
-                    <img class="left-img" src="img/urbeni.jpeg">
-                    <img class="left-img" src="img/ubreni2.jpeg">
-                    <img class="left-img" src="img/ubrbeni3.jpeg">
-                    <img class="left-img" src="img/urbeni.jpeg">
-                    <img class="left-img" src="img/ubreni2.jpeg">
-                    <img class="left-img" src="img/ubrbeni3.jpeg">
-                    
+                    <% for (let i = 0; i < 2; i++) { %>
+                        <img class="left-img" src="<%= images[i].src %>" >
+                    <% } %>
                 </div>
                 <div class="right-side">
                     <div class="size-heading">
-                        <h1>Cardona Hoodie By Cardana Creator</h1>
+                        <h1> <%= title %> </h1>
                         <p><strong>Unisex (Men's & Women's)</strong></p>
                     </div>
                     <div class="price-container">

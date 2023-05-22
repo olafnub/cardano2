@@ -46,10 +46,10 @@ app.post('/submit', (req: Request, res: Response) => {
     res.redirect('back');
 });
 
-// app.get('*/:all', (req, res) => {
-//     const {all} = req.params;
-//     res.send(`<h1>Sorry can't find ${all}</h1>`);
-// });
+app.get('*/:all', (req, res) => {
+    const {all} = req.params;
+    res.send(`<h1>Sorry can't find ${all}</h1>`);
+});
 
 app.listen(port, () => {
     console.log(`Working on port: ${port}!`);

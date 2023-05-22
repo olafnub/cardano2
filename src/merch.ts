@@ -1,7 +1,13 @@
 // Fetchs data from own server to bypass CORS
+
+const success = (data: any) => {
+    console.log(data);
+}
 fetch("http://localhost:8888/merch.json")
 .then(res => res.json())
-.then(data => console.log(data))
+.then(data => {
+    success(data);
+    })
 .catch(err => console.log(err));
 
 const anchor : NodeList = document.querySelectorAll('a');

@@ -1,12 +1,13 @@
 const express = require('express');
 const router = express.Router();
 const fetch = require('node-fetch');
+const productData = require('../public/dist/src/products');
 // const apicache = require('apicache');
 
-const BASE_URL = process.env.BASEURL;
+const API_BASEURL = process.env.BASEURL;
 const API_TEST_TOKEN = process.env.PRINTIFY_API_TEST_KEY;
-const SHOP_ID = process.env.SHOP_ID;
-const PRODUCT_ID = process.env.PRODUCT_ID;
+const shop_id = process.env.SHOP_ID;
+const product_id = process.env.PRODUCT_ID;
 
 router.get('/', (req, res) => {
     res.render('index.html');
@@ -14,7 +15,17 @@ router.get('/', (req, res) => {
 
 router.get('/merch', async (req, res) => {
     // const reviews = await reviewsExport.find({});
-    res.render('merch');
+    const viewData = await productData;
+    const getData = {
+        title: viewData.title,
+        description: viewData.description,
+        images: viewData.images,
+        externalId: viewData.external.id,
+        variants: viewData.variants
+    }
+
+    console.log(getData.variants);
+    res.render('merch', viewData);
 })
 
 // GET ALL PRODUCTS {{baseurl}}/v1/shops/{{shop_id}}/products.json
@@ -27,7 +38,7 @@ router.get('/merch', async (req, res) => {
 
 router.get('/merch.json', async (req, res) => {
      // Fetch from the printify api
-     const response = await fetch(`${BASE_URL}/v1/shops.json`, {
+     const response = await fetch(`${API_BASEURL}/v1/shops/${shop_id}/products/${product_id}.json`, {
         method: 'GET',
         headers: {
             "Content-Type": "application/json",
