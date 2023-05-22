@@ -25,7 +25,7 @@ router.get('/merch', async (req, res) => {
         variants: viewShirtData.variants,
         cardanoPrice: viewCardanoData
     }
-    console.log(getShirtData.cardanoPrice);
+    console.log(typeof getShirtData.description);
 
     res.render('merch', getShirtData);
 })
