@@ -36,7 +36,10 @@
                         <p><strong>Unisex (Men's & Women's)</strong></p>
                     </div>
                     <div class="price-container">
-                        <p class="price"><strong>$20</strong> / </p>
+                        <% let price = variants[0].price/100 %>
+                        <% let priceADA = (price / cardanoPrice).toFixed(5) %>
+                        <p>$<%= price %> / <%= priceADA %> ADA </p>
+
                     </div>
                     <div class="size-information">
                         <p>Select Size:</p>
@@ -49,7 +52,7 @@
                     </div>
                     <div class="description-box">
                         <h3>About</h3>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio, animi molestias impedit natus quaerat cupiditate? Totam distinctio facere error eum provident modi eligendi dolor possimus vel, cupiditate autem illo dolorum!</p>
+                        <%= description %>
                     </div>
 
                     <div id="sizeGuide">

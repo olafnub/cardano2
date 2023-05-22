@@ -77,34 +77,6 @@ function runThis() {
 }
 ;
 runThis();
-// Using coingecko to get cardano price for shopping price
-const priceHTML = document.querySelector('.price');
-let priceString = priceHTML.textContent;
-let priceUsd = "";
-if (priceString !== null) {
-    for (let i = 0; i < priceString.length; i++) {
-        let charCode = priceString[i].codePointAt(0);
-        if (charCode >= 48 && charCode <= 57) {
-            priceUsd += String.fromCodePoint(charCode);
-        }
-    }
-}
-else {
-    priceUsd = "0";
-}
-;
-fetch('https://api.coingecko.com/api/v3/coins/cardano?tickers=true&market_data=true')
-    .then(response => response.json())
-    .then(data => returnData(data))
-    .catch(error => console.log(error));
-function returnData(data) {
-    const cardanoConversion = data.tickers[0].converted_last;
-    const cardanoUsd = cardanoConversion.usd;
-    const cardanoBtc = cardanoConversion.btc;
-    const cardanoEth = cardanoConversion.eth;
-    let shirtPriceAda = (Number(priceUsd) / cardanoUsd).toFixed(5) + " ADA";
-    return priceHTML.textContent += shirtPriceAda;
-}
 // Thank user for submitting a form review
 const frm = document.querySelector('#formId');
 frm.addEventListener('submit', () => {

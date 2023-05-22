@@ -15,17 +15,19 @@ router.get('/', (req, res) => {
 
 router.get('/merch', async (req, res) => {
     // const reviews = await reviewsExport.find({});
-    const viewData = await productData;
-    const getData = {
-        title: viewData.title,
-        description: viewData.description,
-        images: viewData.images,
-        externalId: viewData.external.id,
-        variants: viewData.variants
+    const viewShirtData = await productData[0];
+    const viewCardanoData = await productData[1];
+    const getShirtData = {
+        title: viewShirtData.title,
+        description: viewShirtData.description,
+        images: viewShirtData.images,
+        externalId: viewShirtData.external.id,
+        variants: viewShirtData.variants,
+        cardanoPrice: viewCardanoData
     }
+    console.log(getShirtData.cardanoPrice);
 
-    console.log(getData.variants);
-    res.render('merch', viewData);
+    res.render('merch', getShirtData);
 })
 
 // GET ALL PRODUCTS {{baseurl}}/v1/shops/{{shop_id}}/products.json
