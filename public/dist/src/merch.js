@@ -1,12 +1,9 @@
 "use strict";
-// Fetchs data from own server to bypass CORS
-const success = (data) => {
-    console.log(data);
-};
+// TESTING - REMOVE WHEN READY TO PUBLISH
 fetch("http://localhost:8888/merch.json")
     .then(res => res.json())
     .then(data => {
-    success(data);
+    console.log(data);
 })
     .catch(err => console.log(err));
 const anchor = document.querySelectorAll('a');
@@ -107,9 +104,9 @@ sizeBox.forEach(box => {
     });
 });
 const qtySelect = document.querySelector('#quantity-list');
-let qtyValue = "";
-qtySelect.addEventListener('click', () => {
-    qtyValue = qtySelect.value;
+let qtyValue = 1;
+qtySelect.addEventListener('change', () => {
+    qtyValue = Number(qtySelect.value);
 });
 // Added to your cart function
 const addCart = document.querySelector("#add-to-cart");

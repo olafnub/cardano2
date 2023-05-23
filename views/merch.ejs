@@ -46,9 +46,10 @@
                         <a href="#sizeGuide">Size Guide</a>
                     </div>
                     <div class="size-container">
-                        <div class="size-box"><p>Small</p></div>
-                        <div class="size-box"><p>Medium</p></div>
-                        <div class="size-box"><p>Large</p></div>
+                        <div class="size-box"><p>S</p></div>
+                        <div class="size-box"><p>M</p></div>
+                        <div class="size-box"><p>L</p></div>
+                        <div class="size-box"><p>XL</p></div>
                     </div>
                     <div class="description-box">
                         <h3>About</h3>
@@ -63,11 +64,9 @@
                     <div class="buy-container">        
                         <div class="quant">
                             <select id="quantity-list">
-                                <option value="one">1</option>
-                                <option value="two">2</option>
-                                <option value="three">3</option>
-                                <option value="four">4</option>
-                                <option value="five">5</option>
+                                <% for (let i = 1; i < 5; i++) { %>
+                                    <option value="<%= i%>"><%= i %></option>
+                                    <% } %>
                             </select>
                         </div>
 
