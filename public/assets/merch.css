@@ -84,9 +84,10 @@ section {
     width: 375px;
 }
 .left-side {
-    display: grid;
+    display: flex;
+    flex-direction: column;
     /* grid-template-columns: 1fr 1fr; */
-    gap: 1rem;
+    /* gap: 1rem; */
 }
 .right-side {
     width: 35%;
