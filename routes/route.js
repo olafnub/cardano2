@@ -25,7 +25,7 @@ router.get('/merch', async (req, res) => {
         variants: viewShirtData.variants,
         cardanoPrice: viewCardanoData
     }
-    console.log(typeof getShirtData.description);
+    console.log(getShirtData.cardanoPrice);
 
     res.render('merch', getShirtData);
 })
@@ -53,6 +53,10 @@ router.get('/merch.json', async (req, res) => {
 
    const data = await response.json();
    res.json(await data);
+});
+
+router.get('/shopping', (req, res) => {
+    res.render('shopping');
 })
 
 router.get('*/:all', (req, res) => {

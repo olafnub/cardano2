@@ -112,9 +112,25 @@ qtySelect.addEventListener('change', () => {
 const addCart = document.querySelector("#add-to-cart");
 addCart.addEventListener('click', () => {
     if (selectBox == '') {
-        alert("Please select size");
+        return alert("Please select size");
     }
     else {
         alert("Added to your cart");
+        orderData(selectBox, qtyValue);
     }
 });
+const orderData = (size, qty) => {
+    const order = {
+        size, qty
+    };
+    fetch('/merch/cart', {
+        method: "post",
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(order)
+    })
+        .then(response => response.json())
+        .then(data => console.log(data))
+        .catch(err => console.log(err));
+};
