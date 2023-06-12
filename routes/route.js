@@ -9,8 +9,14 @@ const API_TEST_TOKEN = process.env.PRINTIFY_API_TEST_KEY;
 const shop_id = process.env.SHOP_ID;
 const product_id = process.env.PRODUCT_ID;
 
+router.use(express.json());
+
 router.get('/', (req, res) => {
     res.render('index.html');
+})
+
+router.get('/admin', (req, res) => {
+    res.render('admin')
 })
 
 router.get('/merch', async (req, res) => {
@@ -25,8 +31,6 @@ router.get('/merch', async (req, res) => {
         variants: viewShirtData.variants,
         cardanoPrice: viewCardanoData
     }
-    console.log(getShirtData.cardanoPrice);
-
     res.render('merch', getShirtData);
 })
 
@@ -55,8 +59,18 @@ router.get('/merch.json', async (req, res) => {
    res.json(await data);
 });
 
-router.get('/shopping', (req, res) => {
-    res.render('shopping');
+let orderData;
+
+router.post('/orderData.json', (req, res) => {
+    orderData = req.body;
+})
+
+router.get('/shopping', async (req, res) => {
+    const getOrder = {
+        size: orderData.size,
+        qty: orderData.qty
+    }
+    res.render('shopping', orderData);
 })
 
 router.get('*/:all', (req, res) => {

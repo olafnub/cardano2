@@ -123,14 +123,13 @@ const orderData = (size, qty) => {
     const order = {
         size, qty
     };
-    fetch('/merch/cart', {
+    const options = {
         method: "post",
         headers: {
-            'Content-Type': 'application/json'
+            'Content-type': 'application/json'
         },
         body: JSON.stringify(order)
-    })
-        .then(response => response.json())
-        .then(data => console.log(data))
+    };
+    fetch("http://localhost:8888/orderData.json", options)
         .catch(err => console.log(err));
 };

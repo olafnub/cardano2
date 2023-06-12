@@ -40,15 +40,6 @@ app.post('/submit', (req, res) => {
     new reviews_1.default(user).save();
     res.redirect('back');
 });
-app.post('/merch/cart', (req, res) => {
-    // res.send(req);
-    console.log(req.body);
-    const data = req.body;
-    res.json({
-        size: data.size,
-        qty: data.qty
-    });
-});
 app.listen(port, () => {
     console.log(`Working on port: ${port}!`);
 });

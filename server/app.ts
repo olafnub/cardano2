@@ -46,16 +46,6 @@ app.post('/submit', (req: Request, res: Response) => {
     res.redirect('back');
 });
 
-app.post('/merch/cart', (req, res) => {
-    // res.send(req);
-    console.log(req.body);
-    const data = req.body;
-    res.json({
-        size: data.size,
-        qty: data.qty
-    })
-})
-
 app.listen(port, () => {
     console.log(`Working on port: ${port}!`);
 });

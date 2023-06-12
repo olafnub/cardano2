@@ -131,7 +131,6 @@ addCart.addEventListener('click', () => {
     } else {
         alert("Added to your cart");
         orderData(selectBox, qtyValue);
-        
     }
 });
 
@@ -139,14 +138,14 @@ const orderData = (size: any, qty: any) => {
     const order = {
         size, qty
     }
-   fetch('/merch/cart', {
-    method: "post",
-    headers: {
-        'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(order)
-   })
-   .then(response => response.json())
-   .then(data => console.log(data))
-   .catch(err => console.log(err));
+    const options = {
+        method: "post",
+        headers: {
+            'Content-type': 'application/json'
+        },
+        body: JSON.stringify(order)
+    }
+    fetch("http://localhost:8888/orderData.json", options)
+    .catch(err => console.log(err));
+    
 }
