@@ -4,9 +4,30 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/shopping.css">
     <title>Shop - Cardano-Natives</title>
 </head>
 <body>
-    <%= size %>
+    <main>
+        <nav>
+            <h3><a href="https://cardano.org/">Cardano Natives</a></h3>
+            <ul id="navUl">
+                <li><a href="index.html">Home</a></li>
+                <li><a class="merch" href="/merch">Shop</a></li>
+                <li><a href="#nfts">Connect Wallet</a></li>
+            </ul>
+            <i class="fa-solid fa-bars-staggered"></i>
+        </nav>
+
+        <div class="checkout-container">
+            <h4>Bag</h4>
+            <% if (size == "NA") { %>
+                <p>Bag is currently empty</p>
+            <% } else { %>
+                <%= size %>
+                <% } %>
+
+        </div>
+    </main>
 </body>
 </html>

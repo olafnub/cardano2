@@ -59,18 +59,23 @@ router.get('/merch.json', async (req, res) => {
    res.json(await data);
 });
 
-let orderData;
+let orderData = "";
 
 router.post('/orderData.json', (req, res) => {
     orderData = req.body;
 })
 
 router.get('/shopping', async (req, res) => {
-    const getOrder = {
-        size: orderData.size,
-        qty: orderData.qty
+    if (orderData == "") {
+        res.render('shopping', {size: "NA"});
     }
-    res.render('shopping', orderData);
+    else {
+        const getOrder = {
+            size: orderData.size,
+            qty: orderData.qty
+        }
+        res.render('shopping', getOrder);
+    }
 })
 
 router.get('*/:all', (req, res) => {
