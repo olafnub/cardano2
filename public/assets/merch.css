@@ -95,7 +95,7 @@ section {
 .size-heading {
     display:flex;
     flex-direction: column;
-    line-height: 0.7;
+    line-height: 1.4rem;
 }
 .size-heading h1 {
     margin-bottom: 0;
@@ -313,11 +313,11 @@ section {
     .right-side {
         width: auto;
     }
-    .size-heading {
-        line-height: 1.4rem;
-    }
     .quant {
         width: 30%;
+    }
+    .price-container {
+        margin: 4px 0 16px;
     }
                                 /* reviews */
     .review-container {
