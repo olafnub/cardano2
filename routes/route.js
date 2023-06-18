@@ -19,16 +19,18 @@ router.get('/admin', (req, res) => {
     res.render('admin')
 })
 
+let getShirtData = {};
+
 router.get('/merch', async (req, res) => {
     // const reviews = await reviewsExport.find({});
     const viewShirtData = await productData[0];
     const viewCardanoData = await productData[1];
-    const getShirtData = {
+    getShirtData = {
         title: viewShirtData.title,
         description: viewShirtData.description,
         images: viewShirtData.images,
         externalId: viewShirtData.external.id,
-        variants: viewShirtData.variants,
+        variants: viewShirtData.variants, //Price
         cardanoPrice: viewCardanoData
     }
     res.render('merch', getShirtData);
@@ -65,12 +67,13 @@ router.post('/orderData.json', (req, res) => {
     orderData = req.body;
 })
 
-router.get('/shopping', async (req, res) => {
+router.get('/shopping', (req, res) => {
     if (orderData == "") {
         res.render('shopping', {size: "NA"});
     }
     else {
         const getOrder = {
+            shirt: getShirtData,
             size: orderData.size,
             qty: orderData.qty
         }

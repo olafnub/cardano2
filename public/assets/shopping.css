@@ -57,3 +57,33 @@ nav h3 {
 .fa-solid.fa-bars-staggered {
     display: none;
 }
+
+/* Body */
+/* main {
+    display: flex;
+    flex-direction: column;
+} */
+.checkout-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0.8em;
+    line-height: 0.2rem;
+}
+.merch-container {
+    /* border: 1px solid green; */
+    display: flex;
+    justify-content:space-between;
+    width: 45%;
+}
+.merch-desc {
+    display: flex;
+    flex-direction: column;
+}
+.purchase-desc {
+    display: flex;
+    width: 45%;
+    flex-direction: column;
+    /* gap: 0.2rem; */
+    /* justify-content: flex-start; */
+}
