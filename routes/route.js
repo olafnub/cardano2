@@ -21,6 +21,24 @@ router.get('/admin', (req, res) => {
 
 let getShirtData = {};
 
+router.get('/merch.json', async (req, res) => {
+    // Fetch from the printify api
+    const response = await fetch(`${API_BASEURL}/v1/shops/${shop_id}/products/${product_id}.json`, {
+       method: 'GET',
+       headers: {
+           "Content-Type": "application/json",
+           'Authorization': `Bearer ${API_TEST_TOKEN}`,
+       },
+       // body: JSON.stringify(suceededRaw)
+       // redirect: 'follow'
+   })
+  .catch(error => console.log('error', error));
+
+  const data = await response.json();
+  res.json(data);
+
+});
+
 router.get('/merch', async (req, res) => {
     // const reviews = await reviewsExport.find({});
     const viewShirtData = await productData[0];
@@ -43,23 +61,6 @@ router.get('/merch', async (req, res) => {
 // POST List Specific Product `${API_BASEURL}/v1/shops/${shop_id}/products.json`
 // POST Publish product `${API_BASEURL}/v1/shops/${shop_id}/products/${product_id}/publish.json`
 // POST succeeded `${API_BASEURL}/v1/shops/${shop_id}/products/${product_id}/publishing_succeeded.json`
-
-router.get('/merch.json', async (req, res) => {
-     // Fetch from the printify api
-     const response = await fetch(`${API_BASEURL}/v1/shops/${shop_id}/products/${product_id}.json`, {
-        method: 'GET',
-        headers: {
-            "Content-Type": "application/json",
-            'Authorization': `Bearer ${API_TEST_TOKEN}`,
-        },
-        // body: JSON.stringify(suceededRaw)
-        // redirect: 'follow'
-    })
-   .catch(error => console.log('error', error));
-
-   const data = await response.json();
-   res.json(await data);
-});
 
 let orderData = "";
 

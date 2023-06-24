@@ -2,10 +2,12 @@ import dotenv from 'dotenv';
 import express, {Express, Request, Response} from "express";
 import mongoose, {connect} from "mongoose";
 import reviewsExport from '../src/reviews';
+import adminExport from '../src/admin';
 import Filter from "bad-words";
 // const badWordsFilter = require('../public/dist/src/badwords');
 import words from "../bad-words.json" //https://www.cs.cmu.edu/~biglou/resources/
 import cors from 'cors';
+import bcrypt from 'bcrypt';
 
 const filter = new Filter();
 
@@ -13,6 +15,7 @@ filter.addWords(...words);
 dotenv.config();
 const app: Express = express();
 const port = process.env.PORT;
+const saltRounds = 7;
 
 mongoose.connect(process.env.DATABASE_URL!)
 .then(() => console.log("Mongoose Connected!"))
@@ -45,6 +48,33 @@ app.post('/submit', (req: Request, res: Response) => {
     new reviewsExport(user).save();
     res.redirect('back');
 });
+
+// app.post('/adminlogin', async (req: Request, res: Response) => {
+//     // Create a new username plus password
+//     // bcrypt.hash(req.body.password, saltRounds, (err, hash) => {
+//     //     const loginInfo = {
+//     //         username: req.body.username,
+//     //         password: hash
+//     //     }
+//     //     new adminExport(loginInfo).save();
+//     // })
+
+//     // Compare user login to correct login
+//     try {
+//         const pass = await adminExport.findOne({username: req.body.username});
+//         if (pass != null) {
+//             bcrypt.compare(req.body.password, pass.password,(err, result) => {
+//             console.log(result);
+//             });
+//         }
+
+//     }
+//     catch {
+//         console.log("wrong pass")
+//     }
+
+//     res.redirect('back');
+// })
 
 app.listen(port, () => {
     console.log(`Working on port: ${port}!`);

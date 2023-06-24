@@ -4,7 +4,7 @@ const fetchPrintifyData = fetch("http://localhost:8888/merch.json")
 .then(data => {
     return data;
 })
-.catch(err => console.log(err));
+.catch(err => console.log(err));  
 
 // Using coingecko to get cardano price for shopping price
 interface Cardano {

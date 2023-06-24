@@ -16,6 +16,7 @@ filter.addWords(...bad_words_json_1.default);
 dotenv_1.default.config();
 const app = (0, express_1.default)();
 const port = process.env.PORT;
+const saltRounds = 7;
 mongoose_1.default.connect(process.env.DATABASE_URL)
     .then(() => console.log("Mongoose Connected!"))
     .catch((err) => console.log("error from mongoose", err));
@@ -40,6 +41,29 @@ app.post('/submit', (req, res) => {
     new reviews_1.default(user).save();
     res.redirect('back');
 });
+// app.post('/adminlogin', async (req: Request, res: Response) => {
+//     // Create a new username plus password
+//     // bcrypt.hash(req.body.password, saltRounds, (err, hash) => {
+//     //     const loginInfo = {
+//     //         username: req.body.username,
+//     //         password: hash
+//     //     }
+//     //     new adminExport(loginInfo).save();
+//     // })
+//     // Compare user login to correct login
+//     try {
+//         const pass = await adminExport.findOne({username: req.body.username});
+//         if (pass != null) {
+//             bcrypt.compare(req.body.password, pass.password,(err, result) => {
+//             console.log(result);
+//             });
+//         }
+//     }
+//     catch {
+//         console.log("wrong pass")
+//     }
+//     res.redirect('back');
+// })
 app.listen(port, () => {
     console.log(`Working on port: ${port}!`);
 });
