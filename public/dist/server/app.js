@@ -1,4 +1,13 @@
 "use strict";
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -7,10 +16,12 @@ const dotenv_1 = __importDefault(require("dotenv"));
 const express_1 = __importDefault(require("express"));
 const mongoose_1 = __importDefault(require("mongoose"));
 const reviews_1 = __importDefault(require("../src/reviews"));
+const admin_1 = __importDefault(require("../src/admin"));
 const bad_words_1 = __importDefault(require("bad-words"));
 // const badWordsFilter = require('../public/dist/src/badwords');
 const bad_words_json_1 = __importDefault(require("../bad-words.json")); //https://www.cs.cmu.edu/~biglou/resources/
 const cors_1 = __importDefault(require("cors"));
+const bcrypt_1 = __importDefault(require("bcrypt"));
 const filter = new bad_words_1.default();
 filter.addWords(...bad_words_json_1.default);
 dotenv_1.default.config();
@@ -41,29 +52,37 @@ app.post('/submit', (req, res) => {
     new reviews_1.default(user).save();
     res.redirect('back');
 });
-// app.post('/adminlogin', async (req: Request, res: Response) => {
-//     // Create a new username plus password
-//     // bcrypt.hash(req.body.password, saltRounds, (err, hash) => {
-//     //     const loginInfo = {
-//     //         username: req.body.username,
-//     //         password: hash
-//     //     }
-//     //     new adminExport(loginInfo).save();
-//     // })
-//     // Compare user login to correct login
-//     try {
-//         const pass = await adminExport.findOne({username: req.body.username});
-//         if (pass != null) {
-//             bcrypt.compare(req.body.password, pass.password,(err, result) => {
-//             console.log(result);
-//             });
-//         }
-//     }
-//     catch {
-//         console.log("wrong pass")
-//     }
-//     res.redirect('back');
-// })
+app.post('/admin', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    // Create a new username plus password
+    // bcrypt.hash(req.body.password, saltRounds, (err, hash) => {
+    //     const loginInfo = {
+    //         username: req.body.username,
+    //         password: hash
+    //     }
+    //     new adminExport(loginInfo).save();
+    // })
+    // Compare user login to correct login
+    let obj = {
+        renderSwitch: "false",
+    };
+    try {
+        const pass = yield admin_1.default.findOne({ username: req.body.username });
+        if (pass != null) {
+            bcrypt_1.default.compare(req.body.password, pass.password, (err, result) => {
+                if (result == true) {
+                    obj.renderSwitch = "true";
+                    res.render('adminhome');
+                }
+            });
+        }
+        else {
+            res.send("Try again");
+        }
+    }
+    catch (_a) {
+        return console.log("wrong username or password");
+    }
+}));
 app.listen(port, () => {
     console.log(`Working on port: ${port}!`);
 });

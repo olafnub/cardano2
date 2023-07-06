@@ -49,32 +49,37 @@ app.post('/submit', (req: Request, res: Response) => {
     res.redirect('back');
 });
 
-// app.post('/adminlogin', async (req: Request, res: Response) => {
-//     // Create a new username plus password
-//     // bcrypt.hash(req.body.password, saltRounds, (err, hash) => {
-//     //     const loginInfo = {
-//     //         username: req.body.username,
-//     //         password: hash
-//     //     }
-//     //     new adminExport(loginInfo).save();
-//     // })
-
-//     // Compare user login to correct login
-//     try {
-//         const pass = await adminExport.findOne({username: req.body.username});
-//         if (pass != null) {
-//             bcrypt.compare(req.body.password, pass.password,(err, result) => {
-//             console.log(result);
-//             });
-//         }
-
-//     }
-//     catch {
-//         console.log("wrong pass")
-//     }
-
-//     res.redirect('back');
-// })
+app.post('/admin', async (req: Request, res: Response) => {
+    // Create a new username plus password
+    // bcrypt.hash(req.body.password, saltRounds, (err, hash) => {
+    //     const loginInfo = {
+    //         username: req.body.username,
+    //         password: hash
+    //     }
+    //     new adminExport(loginInfo).save();
+    // })
+    // Compare user login to correct login
+    let obj = {
+        renderSwitch: "false", 
+    }
+    try {
+        const pass = await adminExport.findOne({username: req.body.username});
+        if (pass != null) {
+            bcrypt.compare(req.body.password, pass.password,(err, result) => {
+                if (result == true) {
+                    obj.renderSwitch = "true";
+                    res.render('adminhome');
+                }
+            });
+        }
+        else {
+            res.send("Try again");
+        }
+    }
+    catch {
+        return console.log("wrong username or password")
+    }
+})
 
 app.listen(port, () => {
     console.log(`Working on port: ${port}!`);
