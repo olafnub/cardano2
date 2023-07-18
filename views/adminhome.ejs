@@ -4,18 +4,94 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <title>Home</title>
 </head>
 <body>
-    <h1>Welcome</h1>
+    <div class="header text-center mb-5">
+        <h1>Welcom to admin page!</h1>
+        <h2>Your current shop</h2>
+    </div>
 
-<!-- // GET ALL PRODUCTS {{baseurl}}/v1/shops/{{shop_id}}/products.json
-// GET ONE PRODUCT `${API_BASEURL}/v1/shops/${shop_id}/products/${product_id}.json`
-// DELETE `${API_BASEURL}/v1/shops/${shop_id}/products/${product_id}.json`
-// PUT /v1/shops/{shop_id}/products/{product_id}.json
-// POST List Specific Product `${API_BASEURL}/v1/shops/${shop_id}/products.json`
-// POST Publish product `${API_BASEURL}/v1/shops/${shop_id}/products/${product_id}/publish.json`
-// POST succeeded `${API_BASEURL}/v1/shops/${shop_id}/products/${product_id}/publishing_succeeded.json` -->
+    <h5>Create new cards</h5>
+    <form>
+        <input type="text" placeholder="name">
+    </form>
 
+    <!-- // GET ALL PRODUCTS {{baseurl}}/v1/shops/{{shop_id}}/products.json
+    // GET ONE PRODUCT `${API_BASEURL}/v1/shops/${shop_id}/products/${product_id}.json`
+    // DELETE `${API_BASEURL}/v1/shops/${shop_id}/products/${product_id}.json`
+    // PUT /v1/shops/{shop_id}/products/{product_id}.json
+    // POST List Specific Product `${API_BASEURL}/v1/shops/${shop_id}/products.json`
+    // POST Publish product `${API_BASEURL}/v1/shops/${shop_id}/products/${product_id}/publish.json`
+    // POST succeeded `${API_BASEURL}/v1/shops/${shop_id}/products/${product_id}/publishing_succeeded.json` -->
+    
+    <div class="card-list d-flex flex-row justify-content-around flex-wrap"></div>
 </body>
+
+<script>
+    const baseurl = 'http://localhost:8888/';
+    const merchurl = "merch.json";
+    const shopurl = 'shop.json';
+
+    const cardList = document.querySelector(".card-list");
+
+    let numbersAndSrcs = [];
+    const renderCards = (cards) => {
+        cards.data.forEach((dataValue, x) => {
+            
+            // <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+            //     <ol class="carousel-indicators">
+            //         <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+            //         <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+            //         <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+            //     </ol>
+            // </div>
+            // for (let j = 0; j < cards.data.length; j++) {
+                    for (let i = 0; i < dataValue.images.length; i++) {
+                        numberAndSrc[x][i] = dataValue.images[i].src;
+                }
+            // }
+    
+            console.log("numbers", numberAndSrc);
+            let output = 
+            `
+            <div class="card p-2 bg-light" style="width: 30%;">
+                <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                    <ol class="carousel-indicators">
+                        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                    </ol>
+                </div>
+                <img src="${dataValue.images[0].src}" class="" alt="first image of merch">
+                <div class="card-body">
+                    <h5 class="card-title">${dataValue.title}</h5>
+                    <p class="card-text">${dataValue.description}</p>
+                </div>
+                    <ul class="list-group list-group-flush">
+                    <li class="list-group-item">ID: ${dataValue.id}</li>
+                    <li class="list-group-item">PRICE: ${dataValue.variants[3].cost}</li>
+                    <li class="list-group-item">SIZE: ${dataValue.variants[3].title}</li>
+                </ul>
+                <div class="card-body">
+                    <a href="#" class="card-link">EDIT</a>
+                    <a href="#" class="card-link">DELETE</a>
+                </div>
+            </div>
+            `
+            cardList.innerHTML += output;
+        })
+    }
+
+    // GET card data from shop
+    fetch(baseurl + shopurl)
+    .then(res => res.json())
+    .then(data => {
+        renderCards(data);
+        console.log(data);
+    })
+    .catch(err => console.log(err));
+
+
+
+</script>
 </html>

@@ -39,6 +39,21 @@ router.get('/merch.json', async (req, res) => {
 
 });
 
+router.get('/shop.json', async (req, res) => {
+    const response = await fetch(`${API_BASEURL}/v1/shops/${shop_id}/products.json`, {
+        method: 'GET',
+        headers: {
+            "Content-Type": 'application/json',
+            "Authorization": `Bearer ${API_TEST_TOKEN}`,
+        },
+    })
+    .catch(err => console.log(err));
+
+    const data = await response.json();
+    res.json(data);
+
+})
+
 router.get('/merch', async (req, res) => {
     // const reviews = await reviewsExport.find({});
     const viewShirtData = await productData[0];
@@ -53,14 +68,6 @@ router.get('/merch', async (req, res) => {
     }
     res.render('merch', getShirtData);
 })
-
-// GET ALL PRODUCTS {{baseurl}}/v1/shops/{{shop_id}}/products.json
-// GET ONE PRODUCT `${API_BASEURL}/v1/shops/${shop_id}/products/${product_id}.json`
-// DELETE `${API_BASEURL}/v1/shops/${shop_id}/products/${product_id}.json`
-// PUT /v1/shops/{shop_id}/products/{product_id}.json
-// POST List Specific Product `${API_BASEURL}/v1/shops/${shop_id}/products.json`
-// POST Publish product `${API_BASEURL}/v1/shops/${shop_id}/products/${product_id}/publish.json`
-// POST succeeded `${API_BASEURL}/v1/shops/${shop_id}/products/${product_id}/publishing_succeeded.json`
 
 let orderData = "";
 
