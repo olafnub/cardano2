@@ -17,16 +17,11 @@ const express_1 = __importDefault(require("express"));
 const mongoose_1 = __importDefault(require("mongoose"));
 const reviews_1 = __importDefault(require("../src/reviews"));
 const admin_1 = __importDefault(require("../src/admin"));
-const bad_words_1 = __importDefault(require("bad-words"));
-// const badWordsFilter = require('../public/dist/src/badwords');
-const bad_words_json_1 = __importDefault(require("../bad-words.json")); //https://www.cs.cmu.edu/~biglou/resources/
 const cors_1 = __importDefault(require("cors"));
 const bcrypt_1 = __importDefault(require("bcrypt"));
-const filter = new bad_words_1.default();
-filter.addWords(...bad_words_json_1.default);
 dotenv_1.default.config();
 const app = (0, express_1.default)();
-const port = process.env.PORT;
+const port = process.env.PORT || 8888;
 const saltRounds = 7;
 mongoose_1.default.connect(process.env.DATABASE_URL)
     .then(() => console.log("Mongoose Connected!"))
@@ -45,8 +40,8 @@ app.post('/submit', (req, res) => {
     const month = date_time.getMonth() + 1;
     const year = date_time.getFullYear();
     const user = {
-        username: filter.clean(req.body.username),
-        description: filter.clean(req.body.description),
+        username: req.body.username,
+        description: req.body.description,
         time: year + "-" + month + "-" + date
     };
     new reviews_1.default(user).save();

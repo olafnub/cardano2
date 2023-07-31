@@ -2,9 +2,16 @@ const express = require('express');
 const router = express.Router();
 const fetch = require('node-fetch');
 const productData = require('../public/dist/src/products');
+const stripe = require('stripe')(process.env.STRIPE_PRIVATE_KEY)
+const cors = require('cors')
+
+router.use(cors({
+    origin: 'http://localhost:5500'
+}))
+
 // const apicache = require('apicache');
 
-const API_BASEURL = process.env.BASEURL;
+const API_BASEURL = "https://api.printify.com";
 const API_TEST_TOKEN = process.env.PRINTIFY_API_TEST_KEY;
 const shop_id = process.env.SHOP_ID;
 const product_id = process.env.PRODUCT_ID;
@@ -18,8 +25,6 @@ router.get('/', (req, res) => {
 router.get('/admin', (req, res) => {
     res.render('admin');
 })
-
-let getShirtData = {};
 
 router.get('/merch.json', async (req, res) => {
     // Fetch from the printify api
@@ -54,6 +59,8 @@ router.get('/shop.json', async (req, res) => {
 
 })
 
+let getShirtData;
+
 router.get('/merch', async (req, res) => {
     // const reviews = await reviewsExport.find({});
     const viewShirtData = await productData[0];
@@ -69,23 +76,35 @@ router.get('/merch', async (req, res) => {
     res.render('merch', getShirtData);
 })
 
-let orderData = "";
+router.post('/create-checkout-session', async (req, res) => {
+    try {
+        const session = await stripe.checkout.sessions.create({
+            payment_method_types: ['card'],
+            mode: 'payment',
+            billing_address_collection: 'required',
+            shipping_address_collection: {
+                allowed_countries: ['US', 'CA'],
+            },
+            line_items:
+                [{
+                    price_data: {
+                        currency: 'usd',
+                        product_data: {
+                            name: getShirtData.title
+                        },
+                        unit_amount: getShirtData.variants[0].price //in cents
+                    },
+                    quantity: req.body.qty
+                }],
+            success_url: `${process.env.CLIENT_URL}/success.html`,
+            cancel_url: `${process.env.CLIENT_URL}/merch`
 
-router.post('/orderData.json', (req, res) => {
-    orderData = req.body;
-})
-
-router.get('/shopping', (req, res) => {
-    if (orderData == "") {
-        res.render('shopping', {size: "NA"});
+        })
+        res.json({ url: session.url})
+        console.log(session)
     }
-    else {
-        const getOrder = {
-            shirt: getShirtData,
-            size: orderData.size,
-            qty: orderData.qty
-        }
-        res.render('shopping', getOrder);
+    catch (e) {
+        res.status(500).json({error: e.message})
     }
 })
 

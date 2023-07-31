@@ -3,18 +3,12 @@ import express, {Express, Request, Response} from "express";
 import mongoose, {connect} from "mongoose";
 import reviewsExport from '../src/reviews';
 import adminExport from '../src/admin';
-import Filter from "bad-words";
-// const badWordsFilter = require('../public/dist/src/badwords');
-import words from "../bad-words.json" //https://www.cs.cmu.edu/~biglou/resources/
 import cors from 'cors';
 import bcrypt from 'bcrypt';
 
-const filter = new Filter();
-
-filter.addWords(...words);
 dotenv.config();
 const app: Express = express();
-const port = process.env.PORT;
+const port = process.env.PORT || 8888;
 const saltRounds = 7;
 
 mongoose.connect(process.env.DATABASE_URL!)
@@ -41,8 +35,8 @@ app.post('/submit', (req: Request, res: Response) => {
     const year = date_time.getFullYear();
 
     const user = {
-        username: filter.clean(req.body.username),
-        description: filter.clean(req.body.description),
+        username: req.body.username,
+        description: req.body.description,
         time: year + "-" + month + "-" + date
     }
     new reviewsExport(user).save();

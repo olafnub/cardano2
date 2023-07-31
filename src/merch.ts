@@ -130,22 +130,22 @@ addCart.addEventListener('click', () => {
         return alert("Please select size");
     } else {
         alert("Added to your cart");
-        orderData(selectBox, qtyValue);
+        const order = {size: selectBox, qty: qtyValue}
+        const options = {
+            method: "post",
+            headers: {
+                'Content-type': 'application/json'
+            },
+            body: JSON.stringify(order)
+        }
+        fetch("http://localhost:8888/create-checkout-session", options)
+        .then(res => {
+            if (res.ok) return res.json()
+            return res.json().then(json => Promise.reject(json))
+        })
+        .then(({ url }) => {
+            window.location = url
+        })
+        .catch(err => console.log(err));
     }
 });
-
-const orderData = (size: any, qty: any) => {
-    const order = {
-        size, qty
-    }
-    const options = {
-        method: "post",
-        headers: {
-            'Content-type': 'application/json'
-        },
-        body: JSON.stringify(order)
-    }
-    fetch("http://localhost:8888/orderData.json", options)
-    .catch(err => console.log(err));
-    
-}

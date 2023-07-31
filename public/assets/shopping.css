@@ -85,9 +85,16 @@ main {
 .purchase-desc {
     display: flex;
     width: 45%;
+    align-items: center;
     flex-direction: column;
     background: rgba(var(--color-gray), 40%);
     height: 100vh;
     /* gap: 0.2rem; */
     /* justify-content: flex-start; */
+}
+form {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.3rem;
 }
