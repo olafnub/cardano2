@@ -11,9 +11,16 @@ const app: Express = express();
 const port = process.env.PORT || 8888;
 const saltRounds = 7;
 
-mongoose.connect(process.env.DATABASE_URL!)
-.then(() => console.log("Mongoose Connected!"))
-.catch((err) => console.log("error from mongoose", err));
+mongoose.set('strictQuery', false)
+const connectDB = async ()=> {
+    try {
+        const conn = await mongoose.connect(process.env.DATABASE_URL!); // not undefined & is a string
+        console.log(`Mongo Connected: ${conn.connection.host}`);
+    } catch (error) {
+        console.log(error);
+        process.exit(1);
+    }
+}
 
 app.use(express.static('public'));
 app.use(express.urlencoded({extended: true}));
@@ -22,7 +29,6 @@ app.use(express.json());
 app.set('view engine', 'ejs');
 
 app.use("/", require("../../../routes/route.js"));
-
 // Enable cors
 app.use(cors());
 
@@ -75,6 +81,8 @@ app.post('/admin', async (req: Request, res: Response) => {
     }
 })
 
-app.listen(port, () => {
-    console.log(`Working on port: ${port}!`);
+connectDB().then(() => {
+    app.listen(port, () => {
+        console.log(`Listening on port ${port}`)
+    })
 });

@@ -1,6 +1,7 @@
 "use strict";
+// Hi
 // TESTING - REMOVE WHEN READY TO PUBLISH
-fetch("http://localhost:8888/merch.json")
+fetch("CLIENT_URL/merch.json")
     .then(res => res.json())
     .then(data => {
     console.log(data);
@@ -124,7 +125,7 @@ addCart.addEventListener('click', () => {
             },
             body: JSON.stringify(order)
         };
-        fetch("http://localhost:8888/create-checkout-session", options)
+        fetch("CLIENT_URL/create-checkout-session", options)
             .then(res => {
             if (res.ok)
                 return res.json();

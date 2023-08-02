@@ -23,9 +23,17 @@ dotenv_1.default.config();
 const app = (0, express_1.default)();
 const port = process.env.PORT || 8888;
 const saltRounds = 7;
-mongoose_1.default.connect(process.env.DATABASE_URL)
-    .then(() => console.log("Mongoose Connected!"))
-    .catch((err) => console.log("error from mongoose", err));
+mongoose_1.default.set('strictQuery', false);
+const connectDB = () => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const conn = yield mongoose_1.default.connect(process.env.DATABASE_URL); // not undefined & is a string
+        console.log(`Mongo Connected: ${conn.connection.host}`);
+    }
+    catch (error) {
+        console.log(error);
+        process.exit(1);
+    }
+});
 app.use(express_1.default.static('public'));
 app.use(express_1.default.urlencoded({ extended: true }));
 app.use(express_1.default.json());
@@ -78,6 +86,8 @@ app.post('/admin', (req, res) => __awaiter(void 0, void 0, void 0, function* () 
         return console.log("wrong username or password");
     }
 }));
-app.listen(port, () => {
-    console.log(`Working on port: ${port}!`);
+connectDB().then(() => {
+    app.listen(port, () => {
+        console.log(`Listening on port ${port}`);
+    });
 });

@@ -3,11 +3,6 @@ const router = express.Router();
 const fetch = require('node-fetch');
 const productData = require('../public/dist/src/products');
 const stripe = require('stripe')(process.env.STRIPE_PRIVATE_KEY)
-const cors = require('cors')
-
-router.use(cors({
-    origin: 'http://localhost:5500'
-}))
 
 // const apicache = require('apicache');
 
