@@ -1,6 +1,6 @@
 // Hi
 // TESTING - REMOVE WHEN READY TO PUBLISH
-fetch("CLIENT_URL/merch.json")
+fetch("https://erin-courageous-pike.cyclic.cloud/merch.json")
 .then(res => res.json())
 .then(data => {
     console.log(data);
@@ -139,7 +139,7 @@ addCart.addEventListener('click', () => {
             },
             body: JSON.stringify(order)
         }
-        fetch("CLIENT_URL/create-checkout-session", options)
+        fetch("https://erin-courageous-pike.cyclic.cloud/create-checkout-session", options)
         .then(res => {
             if (res.ok) return res.json()
             return res.json().then(json => Promise.reject(json))
