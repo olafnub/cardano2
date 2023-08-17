@@ -9,7 +9,7 @@ const cors = require('cors');
 // const apicache = require('apicache');
 
 const API_BASEURL = "https://api.printify.com";
-const API_TEST_TOKEN = process.env.PRINTIFY_API_TEST_KEY;
+const API_SHOPFITY_TOKEN = process.env.PRINTIFY_API_KEY;
 const shop_id = process.env.SHOP_ID;
 const product_id = process.env.PRODUCT_ID;
 
@@ -34,7 +34,7 @@ router.get('/merch.json', cors(corsOption), async (req, res) => {
        method: 'GET',
        headers: {
            "Content-Type": "application/json",
-           'Authorization': `Bearer ${API_TEST_TOKEN}`,
+           'Authorization': `Bearer ${API_SHOPFITY_TOKEN}`,
        },
        // body: JSON.stringify(suceededRaw)
        // redirect: 'follow'
@@ -51,7 +51,7 @@ router.get('/shop.json', async (req, res) => {
         method: 'GET',
         headers: {
             "Content-Type": 'application/json',
-            "Authorization": `Bearer ${API_TEST_TOKEN}`,
+            "Authorization": `Bearer ${API_SHOPFITY_TOKEN}`,
         },
     })
     .catch(err => console.log(err));
