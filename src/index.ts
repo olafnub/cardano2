@@ -3,6 +3,13 @@ const urlByTerm: string = 'ByTerm?term=';
 const urlByName: string = 'Name?slug=';
 const cardanoUrl: string = 'https://us-central1-builtoncardano.cloudfunctions.net/api/projects';
 
+fetch("https://erin-courageous-pike.cyclic.cloud/merch.json")
+.then(res => res.json())
+.then(data => {
+    console.log(data);
+    })
+.catch(err => console.log(err));
+
 let terms: string[] = ["defi", "nft collections", "industry solutions"];
 terms.forEach(term=> {
     fetch(cardanoUrl + urlByTerm + term)

@@ -1,12 +1,3 @@
-// Hi
-// TESTING - REMOVE WHEN READY TO PUBLISH
-fetch("https://erin-courageous-pike.cyclic.cloud/merch.json")
-.then(res => res.json())
-.then(data => {
-    console.log(data);
-    })
-.catch(err => console.log(err));
-
 const anchor : NodeList = document.querySelectorAll('a');
 for (let i = 0; i < anchor.length; i++) {
     let checkAnchor = anchor[i] as HTMLAnchorElement;
