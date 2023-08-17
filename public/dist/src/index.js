@@ -19,6 +19,12 @@ terms.forEach(term => {
     })
         .catch(error => console.log('ERROR: ' + error));
 });
+fetch("https://erin-courageous-pike.cyclic.cloud/merch.json")
+    .then(res => res.json())
+    .then(data => {
+    console.log(data);
+})
+    .catch(err => console.log(err));
 // Used these for getting each card info
 // [0].createdAt
 // [0].updatedAt
