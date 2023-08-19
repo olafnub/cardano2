@@ -3,7 +3,8 @@ const express = require('express');
 const router = express.Router();
 const fetch = require('node-fetch');
 const productData = require('../public/dist/src/products');
-const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+// const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+const stripe = require('stripe')('sk_test_51NYg7SLr3QgCG9q5sZlJU1Uu0GaYtOfXvgTeiS3HZ3gq5T0PzZgw59Ktv12RoveOUS8HjFgQN2iCzV17JX6CpHLZ0050NNQt4n');
 const cors = require('cors');
 
 // const apicache = require('apicache');
@@ -79,38 +80,61 @@ router.get('/merch', async (req, res) => {
     res.render('merch', getShirtData);
 })
 
+// router.post('/create-checkout-session', async (req, res) => {
+//     try {
+//         console.log(getShirtData.title)
+//         const session = await stripe.checkout.sessions.create({
+//             payment_method_types: ['card'],
+//             mode: 'payment',
+//             billing_address_collection: 'required',
+//             shipping_address_collection: {
+//                 allowed_countries: ['US', 'CA'],
+//             },
+//             line_items:
+//                 [{
+//                     price_data: {
+//                         currency: 'usd',
+//                         product_data: {
+//                             name: getShirtData.title
+//                         },
+//                         unit_amount: getShirtData.variants[0].price //in cents
+//                     },
+//                     quantity: req.body.qty
+//                 }],
+//             success_url: `${process.env.CYCLIC_URL}/success.html`,
+//             cancel_url: `${process.env.CYCLIC_URL}/merch`
+
+//         })
+//         res.json({ url: session.url})
+//         console.log(session)
+//     }
+//     catch (e) {
+//         res.status(500).json({error: e.message})
+//     }
+// })
+
 router.post('/create-checkout-session', async (req, res) => {
     try {
-        console.log(getShirtData.title)
         const session = await stripe.checkout.sessions.create({
-            payment_method_types: ['card'],
-            mode: 'payment',
-            billing_address_collection: 'required',
-            shipping_address_collection: {
-                allowed_countries: ['US', 'CA'],
+        line_items: [
+            {
+            // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
+            price: 'price_1NgiNvLr3QgCG9q5DttE7wQG',
+            quantity: 1,
             },
-            line_items:
-                [{
-                    price_data: {
-                        currency: 'usd',
-                        product_data: {
-                            name: getShirtData.title
-                        },
-                        unit_amount: getShirtData.variants[0].price //in cents
-                    },
-                    quantity: req.body.qty
-                }],
-            success_url: `${process.env.CYCLIC_URL}/success.html`,
-            cancel_url: `${process.env.CYCLIC_URL}/merch`
-
-        })
+        ],
+        mode: 'payment',
+        success_url: `${process.env.CYCLIC_URL}/success.html`,
+        cancel_url: `${process.env.CYCLIC_URL}/cancel.html`,
+        automatic_tax: {enabled: true},
+        });
+    
         res.json({ url: session.url})
-        console.log(session)
     }
-    catch (e) {
+    catch(e) {
         res.status(500).json({error: e.message})
     }
-})
+  });
 
 router.get('*/:all', (req, res) => {
     const {all} = req.params;
