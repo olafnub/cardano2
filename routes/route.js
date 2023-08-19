@@ -28,7 +28,7 @@ router.get('/admin', (req, res) => {
     res.render('admin');
 })
 
-router.get('/merch.json', cors(corsOption), async (req, res) => {
+router.get('/merch.json', async (req, res) => {
     // Fetch from the printify api
     const response = await fetch(`${API_BASEURL}/v1/shops/${shop_id}/products/${product_id}.json`, {
        method: 'GET',
@@ -41,7 +41,7 @@ router.get('/merch.json', cors(corsOption), async (req, res) => {
    })
   .catch(error => console.log('error', error));
 
-  const data = await response.json();
+  const data = await response.data();
   res.json(data);
 
 });
