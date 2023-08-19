@@ -115,6 +115,14 @@ qtySelect.addEventListener('change', () => {
     qtyValue = Number(qtySelect.value);
 });
 
+const locationUrl = location.hostname;
+let clientUrl = "https://erin-courageous-pike.cyclic.cloud" ;
+
+if (locationUrl == 'localhost') {
+    clientUrl = "http://localhost:8888"
+}
+console.log(clientUrl);
+
 // Added to your cart function
 const addCart = document.querySelector("#add-to-cart") as HTMLButtonElement;
 addCart.addEventListener('click', () => {
@@ -130,7 +138,7 @@ addCart.addEventListener('click', () => {
             },
             body: JSON.stringify(order)
         }
-        fetch("https://erin-courageous-pike.cyclic.cloud/create-checkout-session", options)
+        fetch(`${clientUrl}/create-checkout-session`, options)
         .then(res => {
             if (res.ok) return res.json()
             return res.json().then(json => Promise.reject(json))

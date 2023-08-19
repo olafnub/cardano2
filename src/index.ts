@@ -19,12 +19,6 @@ terms.forEach(term=> {
 
 })
 
-fetch("https://erin-courageous-pike.cyclic.cloud/printify-api")
-.then(res => res.json())
-.then(data => console.log(data))
-.catch(err => console.log(err));
-
-
 // Used these for getting each card info
 // [0].createdAt
 // [0].updatedAt

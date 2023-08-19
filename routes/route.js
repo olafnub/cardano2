@@ -47,17 +47,6 @@ router.get('/merch-api', async (req, res) => {
 
 });
 
-router.get('/printify-api', async (req, res) => {
-    const response = await fetch('https://api.printify.com/v1/catalog/blueprints.json', {
-        method: 'GET',
-        headers: {
-            'Authorization': `Bearer ${API_PRINTIFY_TOKEN}`
-        }
-    })
-    const data = response.json();
-    res.json(await data);
-})
-
 router.get('/shop.json', async (req, res) => {
     const response = await fetch(`${API_BASEURL}/v1/shops/${shop_id}/products.json`, {
         method: 'GET',
@@ -92,6 +81,7 @@ router.get('/merch', async (req, res) => {
 
 router.post('/create-checkout-session', async (req, res) => {
     try {
+        console.log(getShirtData.title)
         const session = await stripe.checkout.sessions.create({
             payment_method_types: ['card'],
             mode: 'payment',
