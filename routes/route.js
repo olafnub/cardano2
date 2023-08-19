@@ -100,8 +100,8 @@ router.post('/create-checkout-session', async (req, res) => {
                     },
                     quantity: req.body.qty
                 }],
-            success_url: `${process.env.CLIENT_URL}/success.html`,
-            cancel_url: `${process.env.CLIENT_URL}/merch`
+            success_url: `${process.env.CYCLIC_URL}/success.html`,
+            cancel_url: `${process.env.CYCLIC_URL}/merch`
 
         })
         res.json({ url: session.url})
