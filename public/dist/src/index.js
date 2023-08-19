@@ -18,7 +18,7 @@ terms.forEach(term => {
     })
         .catch(error => console.log('ERROR: ' + error));
 });
-const response = fetch("https://erin-courageous-pike.cyclic.cloud/merch-api")
+fetch("https://erin-courageous-pike.cyclic.cloud/printify-api")
     .then(res => res.json())
     .then(data => console.log(data))
     .catch(err => console.log(err));

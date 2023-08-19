@@ -38,9 +38,9 @@ app.use(express_1.default.static('public'));
 app.use(express_1.default.urlencoded({ extended: true }));
 app.use(express_1.default.json());
 app.set('view engine', 'ejs');
-app.use("/", require("../../../routes/route.js"));
 // Enable cors
 app.use((0, cors_1.default)());
+app.use("/", require("../../../routes/route.js"));
 app.post('/submit', (req, res) => {
     const ts = Date.now();
     const date_time = new Date(ts);
