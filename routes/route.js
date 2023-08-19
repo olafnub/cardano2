@@ -28,7 +28,7 @@ router.get('/admin', (req, res) => {
     res.render('admin');
 })
 
-router.get('/merch.json', async (req, res) => {
+router.get('/merch-api', async (req, res) => {
     // Fetch from the printify api
     const response = await fetch(`${API_BASEURL}/v1/shops/${shop_id}/products/${product_id}.json`, {
        method: 'GET',
@@ -46,6 +46,12 @@ router.get('/merch.json', async (req, res) => {
   res.json(data);
 
 });
+
+router.get('/cardano-api', async(req, res) => {
+    const response = await fetch("https://us-central1-builtoncardano.cloudfunctions.net/api/projects/ByTerm?term=defi")
+    const data = await response.json();
+    res.json(data)
+})
 
 router.get('/shop.json', async (req, res) => {
     const response = await fetch(`${API_BASEURL}/v1/shops/${shop_id}/products.json`, {

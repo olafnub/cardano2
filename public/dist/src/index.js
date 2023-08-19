@@ -1,7 +1,6 @@
 "use strict";
 // cmd shift p -> typescript restart server | check if code is right or not for red squigly
 const urlByTerm = 'ByTerm?term=';
-const urlByName = 'Name?slug=';
 const cardanoUrl = 'https://us-central1-builtoncardano.cloudfunctions.net/api/projects';
 let terms = ["defi", "nft collections", "industry solutions"];
 terms.forEach(term => {
@@ -19,11 +18,15 @@ terms.forEach(term => {
     })
         .catch(error => console.log('ERROR: ' + error));
 });
-fetch("https://erin-courageous-pike.cyclic.cloud/merch.json")
+const response = fetch("https://erin-courageous-pike.cyclic.cloud/merch-api")
     .then(res => res.json())
     .then(data => {
     console.log(data);
 })
+    .catch(err => console.log(err));
+fetch("https://erin-courageous-pike.cyclic.cloud/cardano-api")
+    .then(res => res.json)
+    .then(data => console.log(data))
     .catch(err => console.log(err));
 // Used these for getting each card info
 // [0].createdAt
