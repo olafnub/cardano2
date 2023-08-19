@@ -1,5 +1,5 @@
 // Fetchs data from own server to bypass CORS
-const fetchPrintifyData = fetch("https://erin-courageous-pike.cyclic.cloud/create-checkout-session/merch.json")
+const fetchPrintifyData = fetch("https://erin-courageous-pike.cyclic.cloud/merch.json")
 .then(res => res.json())
 .then(data => {
     return data;
