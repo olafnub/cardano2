@@ -20,12 +20,6 @@ terms.forEach(term => {
 });
 const response = fetch("https://erin-courageous-pike.cyclic.cloud/merch-api")
     .then(res => res.json())
-    .then(data => {
-    console.log(data);
-})
-    .catch(err => console.log(err));
-fetch("https://erin-courageous-pike.cyclic.cloud/cardano-api")
-    .then(res => res.json)
     .then(data => console.log(data))
     .catch(err => console.log(err));
 // Used these for getting each card info

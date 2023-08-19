@@ -28,9 +28,10 @@ app.use(express.json());
 
 app.set('view engine', 'ejs');
 
-app.use("/", require("../../../routes/route.js"));
 // Enable cors
 app.use(cors());
+
+app.use("/", require("../../../routes/route.js"));
 
 app.post('/submit', (req: Request, res: Response) => {
 
