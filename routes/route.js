@@ -102,11 +102,11 @@ router.get('/merch', async (req, res) => {
 //                     quantity: req.body.qty
 //                 }],
 //             success_url: `${process.env.CYCLIC_URL}/success.html`,
-//             cancel_url: `${process.env.CYCLIC_URL}/merch`
+//             cancel_url: `${process.env.CYCLIC_URL}/merch`,
+//             automatic_tax: {enabled: true}
 
 //         })
 //         res.json({ url: session.url})
-//         console.log(session)
 //     }
 //     catch (e) {
 //         res.status(500).json({error: e.message})
@@ -116,18 +116,30 @@ router.get('/merch', async (req, res) => {
 router.post('/create-checkout-session', async (req, res) => {
     try {
         const session = await stripe.checkout.sessions.create({
-        line_items: [
-            {
-            // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-            price: 'price_1NgiNvLr3QgCG9q5DttE7wQG',
-            quantity: 1,
+            payment_method_types: ['card'],
+            mode: 'payment',
+            billing_address_collection: 'required',
+            shipping_address_collection: {
+                allowed_countries: ['US', 'CA'],
             },
-        ],
-        mode: 'payment',
-        success_url: `${process.env.CYCLIC_URL}/success.html`,
-        cancel_url: `${process.env.CYCLIC_URL}/cancel.html`,
-        automatic_tax: {enabled: true},
-        });
+            line_items: [
+                {
+                // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
+                price_data: {
+                    currency: 'usd',
+                    product_data: {
+                        name: getShirtData.title
+                    },
+                    unit_amount: getShirtData.variants[0].price //in cents
+                },
+                quantity: req.body.qty
+                },
+            ],
+            mode: 'payment',
+            success_url: `${process.env.CYCLIC_URL}/success.html`,
+            cancel_url: `${process.env.CYCLIC_URL}/cancel.html`,
+            automatic_tax: {enabled: true},
+            });
     
         res.json({ url: session.url})
     }
