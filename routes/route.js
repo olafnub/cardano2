@@ -48,7 +48,7 @@ router.get('/merch-api', async (req, res) => {
 });
 
 router.get('/cardano-api', async(req, res) => {
-    const response = await fetch("https://us-central1-builtoncardano.cloudfunctions.net/api/projects/ByTerm?term=defi")
+    const response = await fetch("https://us-central1-builtoncardano.cloudfunctions.net/api/projectsByTerm?term=defi")
     const data = await response.json();
     res.json(data)
 })
