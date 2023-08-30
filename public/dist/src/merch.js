@@ -54,11 +54,11 @@ function runThis() {
             prevY = currentY;
         }, 100);
         let currentY = window.scrollY;
-        if (currentY > prevY) {
-            navBar.classList.add('nav--remove');
-        }
-        else if (currentY === 0) {
+        if (currentY <= 60 || currentY == 0) {
             navBar.classList.remove('nav--remove');
+        }
+        else if (currentY > prevY) {
+            navBar.classList.add('nav--remove');
         }
         else {
             navBar.classList.remove('nav--remove');

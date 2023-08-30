@@ -66,10 +66,10 @@ window.addEventListener('scroll', () => {
 
     let currentY: number = window.scrollY;
 
-    if (currentY > prevY) {
-        navBar.classList.add('nav--remove');
-    } else if (currentY === 0) {
+    if(currentY <= 60 || currentY == 0) {
         navBar.classList.remove('nav--remove');
+    } else if (currentY > prevY) {
+        navBar.classList.add('nav--remove');
     } else {
         navBar.classList.remove('nav--remove');
     }
